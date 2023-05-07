@@ -3,7 +3,6 @@
 [![GitHub stars](https://img.shields.io/github/stars/tasada038/ms5837_bar_ros.svg?style=social&label=Star&maxAge=2592000)](https://github.com/tasada038/ms5837_bar_ros/stargazers/)
 [![GitHub forks](https://img.shields.io/github/forks/tasada038/ms5837_bar_ros.svg?style=social&label=Fork&maxAge=2592000)](https://github.com/tasada038/ms5837_bar_ros/network/)
 [![GitHub issues](https://img.shields.io/github/issues/tasada038/ms5837_bar_ros.svg)](https://github.com/tasada038/ms5837_bar_ros/issues/)
-[![GitHub license](https://img.shields.io/github/license/tasada038/ms5837_bar_ros.svg)](https://github.com/tasada038/ms5837_bar_ros/blob/master/LICENSE)
 
 ## Overview
 
@@ -24,11 +23,10 @@ The source code is released under a [MIT license](LICENSE).
 
 Clone with `--recursive` in order to get the necessary `ms5837-python` library:
 
-:::note warn
-The python library will generate a syntax error if there is a hyphen in the name.
+> **Warning**\
+> The python library will generate a syntax error if there is a hyphen in the name.\
+> Therefore, we need to move ms5837 package in the submodule.
 
-Therefore, we need to move ms5837 package in the submodule.
-:::
 
 ```
 cd dev_ws/src
@@ -59,7 +57,10 @@ ros2 launch ms5837_bar_ros bar02.launch.py
 
 ## Ping sonar Topics
 The topics of the ms5837_bar_ros are as follows.
-xx is 30 or 02.
+
+> **Note**\
+> xx is 30 or 02.
+
 
 ```
 $ ros2 topic list
