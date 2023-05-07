@@ -1,0 +1,3 @@
+[submodule "ms5837_bar_ros/ms5837-python"]
+	path = ms5837_bar_ros/ms5837-python
+	url = https://github.com/bluerobotics/ms5837-python.git
