@@ -24,6 +24,12 @@ The source code is released under a [MIT license](LICENSE).
 
 Clone with `--recursive` in order to get the necessary `ms5837-python` library:
 
+:::note warn
+The python library will generate a syntax error if there is a hyphen in the name.
+
+Therefore, we need to move ms5837 package in the submodule.
+:::
+
 ```
 cd dev_ws/src
 git clone -b master --recursive https://github.com/tasada038/ms5837_bar_ros.git
@@ -49,46 +55,24 @@ ros2 launch ms5837_bar_ros bar30.launch.py
 ros2 launch ms5837_bar_ros bar02.launch.py
 ```
 
-![bar_rviz_img](img/bar_rviz.png)
+![ms5837_barxx_img](img/ms5837_barxx.png)
 
 ## Ping sonar Topics
 The topics of the ms5837_bar_ros are as follows.
+xx is 30 or 02.
 
 ```
 $ ros2 topic list
-/bar02/param/gain
-/bar02/param/interval
-/bar02/param/mode
-/bar02/param/speed
-/bar02/range
+/barxx/pressure
+/barxx/temperature
+/barxx/depth
+/barxx/odom
 ```
 
-- std_msgs.msg Float32: /bar02/param/gain
-- std_msgs.msg Float32: /bar02/param/interval
-- std_msgs.msg Float32: /bar02/param/mode
-- std_msgs.msg Float32: /bar02/param/speed
-- sensor_msgs.msg Range: /bar02/range
-
-## Ping sonar Parameters
-The parameters for the ms5837_bar_ros are as follows.
-
-```
-$ ros2 param list
-/bar02_node:
-  gain_num
-  interval_num
-  mode_auto
-  scan_lenght
-  scan_start
-  speed
-```
-
-- gain_num parameter range is [0 - 6] (int).
-- interval_num range is [50 - 200] (int, ms).
-- mode_auto range is [0 or 1].
-- scan_lenght range is [2000 - 10000] (int ms). Blue Robotics Inc. default is 2000 mm.
-- scan_start range is [30 - 200]. Blue Robotics Inc. default is 100 mm.
-- scan_start range is [1050000 - 1550000] (int mm/s).
+- std_msgs.msg Float32: /barxx/pressure
+- std_msgs.msg Float32: /barxx/temperature
+- std_msgs.msg Float32: /barxx/depth
+- nav_msgs.msg Odometry: /barxx/odom
 
 ## License
 This action is licensed under the MIT License. This project is originally created by [Blue Robotics](https://github.com/bluerobotics), and maintained continuously by Takumi Asada.
