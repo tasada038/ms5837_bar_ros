@@ -4,7 +4,7 @@ from glob import glob
 from setuptools import setup
 
 package_name = 'ms5837_bar_ros'
-submodules = package_name + '/ms5837-python'
+submodules = package_name + '/ms5837'
 
 # build a list of the data files
 data_files = []

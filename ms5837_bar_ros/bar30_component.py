@@ -8,10 +8,7 @@ from std_msgs.msg import Float32
 
 from rcl_interfaces.msg import SetParametersResult
 
-# from brping import Ping1D
-import importlib
-module_name = "ms5837_bar_ros.ms5837-python.ms5837.ms5837"
-module = importlib.import_module(module_name)
+from . import ms5837
 
 import time
 
@@ -19,11 +16,11 @@ import time
 class BarComponentr:
     def __init__(self):
         
-        self.sensor = module.MS5837_30BA() # Default I2C bus is 1 (Raspberry Pi 3)
-        #self.sensor = module.MS5837_30BA(0) # Specify I2C bus
-        #self.sensor = module.MS5837_02BA()
-        #self.sensor = module.MS5837_02BA(0)
-        #self.sensor = module.MS5837(model=module.MS5837_MODEL_30BA, bus=0) # Specify model and bus
+        self.sensor = ms5837.MS5837_30BA() # Default I2C bus is 1 (Raspberry Pi 3)
+        #self.sensor = ms5837.MS5837_30BA(0) # Specify I2C bus
+        #self.sensor = ms5837.MS5837_02BA()
+        #self.sensor = ms5837.MS5837_02BA(0)
+        #self.sensor = ms5837.MS5837(model=ms5837.MS5837_MODEL_30BA, bus=0) # Specify model and bus
 
         # We must initialize the self.sensor before reading it
         if not self.sensor.init():
@@ -36,20 +33,20 @@ class BarComponentr:
                 exit(1)
 
         print("Pressure: {} atm {} Torr {} psi".format(
-                round( self.sensor.pressure(module.UNITS_atm), 2),
-                round( self.sensor.pressure(module.UNITS_Torr), 2),
-                round( self.sensor.pressure(module.UNITS_psi), 2),
+                round( self.sensor.pressure(ms5837.UNITS_atm), 2),
+                round( self.sensor.pressure(ms5837.UNITS_Torr), 2),
+                round( self.sensor.pressure(ms5837.UNITS_psi), 2),
         ))
 
 
         print("Temperature: {} C {} F {} K".format(
-                round( self.sensor.temperature(module.UNITS_Centigrade), 2),
-                round( self.sensor.temperature(module.UNITS_Farenheit), 2),
-                round( self.sensor.temperature(module.UNITS_Kelvin), 2),
+                round( self.sensor.temperature(ms5837.UNITS_Centigrade), 2),
+                round( self.sensor.temperature(ms5837.UNITS_Farenheit), 2),
+                round( self.sensor.temperature(ms5837.UNITS_Kelvin), 2),
         ))
 
         self.freshwaterDepth = self.sensor.depth() # default is freshwater
-        self.sensor.setFluidDensity(module.DENSITY_SALTWATER)
+        self.sensor.setFluidDensity(ms5837.DENSITY_SALTWATER)
         self.saltwaterDepth = self.sensor.depth() # No nead to read() again
         self.sensor.setFluidDensity(1000) # kg/m^3
 
@@ -73,7 +70,7 @@ class BarComponentr:
     def pressure_value(self):
         if self.sensor.read():
                 hpa_data = self.sensor.pressure()
-                psi_data = self.sensor.pressure(module.UNITS_psi)
+                psi_data = self.sensor.pressure(ms5837.UNITS_psi)
 
                 # Debag
                 #print("Pressure: {} hPa  {} psi".format(
@@ -89,7 +86,7 @@ class BarComponentr:
     def temperature_value(self):
         if self.sensor.read():
                 temp_degrees = self.sensor.temperature()
-                temp_farenheit = self.sensor.temperature(module.UNITS_Farenheit)
+                temp_farenheit = self.sensor.temperature(ms5837.UNITS_Farenheit)
                 
                 # Debag
                 #print("Temperature: {} C  {} F".format(

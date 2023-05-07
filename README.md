@@ -27,8 +27,9 @@ Clone with `--recursive` in order to get the necessary `ms5837-python` library:
 ```
 cd dev_ws/src
 git clone -b master --recursive https://github.com/tasada038/ms5837_bar_ros.git
-cd ~/dev_ws/src/ms5837_bar_ros/ms5837_bar_ros/ms5837-python/
-sudo rm -r *.py
+cd ~/dev_ws/src/ms5837_bar_ros/ms5837_bar_ros/
+mv ms5837-python/ms5837 ./
+sudo rm -r ms5837-python/*.py
 cd ~/dev_ws
 colcon build --packages-select ms5837_bar_ros
 ```
